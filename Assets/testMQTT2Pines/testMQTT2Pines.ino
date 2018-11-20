@@ -18,9 +18,9 @@
 #define TOUCH_BACKWARD T3 //ESP32 Pin D15
 #define LED_PIN 2
 
-const char* ssid = "w1f1@p3rryt05";//Nombre de wifi
-const char* password = "z0w1eYn1n0";//Password
-const char* mqtt_server = "192.168.1.77";//IP del servidor con mosquitto broker
+const char* ssid = "WIFI_NAME";//Nombre de wifi
+const char* password = "WIFI_PASSWORD";//Password
+const char* mqtt_server = "IP_BROKER";//IP del servidor con mosquitto broker
 //const char* mqtt_server = "http://broker.mqtt-dashboard.com/"
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -29,8 +29,8 @@ long lastMsg = 0;
 char msg[50];
 //int value = 0;
 bool published = false;
-int touchValueForward = 100;
-int touchValueBackward = 100;
+//int touchValueForward = 100;
+//int touchValueBackward = 100;
 
 void setup()
 {
@@ -60,6 +60,7 @@ void loop()
             if(!published)
             {
                 Serial.println("Forward");
+                //client.publish("topic","Mensaje");
                 client.publish("esp32/input", "Forward");
                 published = true;
             }   
@@ -93,7 +94,7 @@ void setup_wifi()
 {
     delay(10);
     Serial.println();
-    Serial.print("Connecting to ");
+    Serial.print("Conectando a ");
     Serial.println(ssid);
 
     WiFi.begin(ssid, password);
@@ -105,16 +106,16 @@ void setup_wifi()
     }
 
     Serial.println("");
-    Serial.println("Wifi Connected");
+    Serial.println("Wifi Conectada");
     Serial.print("IP Address: ");
     Serial.println(WiFi.localIP());
 }/*Fin setup_wifi*/
 
 void callback(char* topic, byte* message, unsigned int length)
 {
-    Serial.print("Message arrived on topic: ");
+    Serial.print("Mensaje recibido en topic: ");
     Serial.print(topic);
-    Serial.print(". Message: ");
+    Serial.print(". Mensaje: ");
     String messageTemp;
     for (int i = 0; i < length; i++)
     {
@@ -124,7 +125,7 @@ void callback(char* topic, byte* message, unsigned int length)
     Serial.println();
     if(String(topic) == "esp32/output")
     {
-        Serial.print("Changing output to ");
+        Serial.print("Cambiando pin de salida a ");
         if(messageTemp=="on")
         {
             Serial.println("on");
@@ -143,18 +144,18 @@ void reconnect()
     // Loop until we're reconnected
     while(!client.connected())
     {
-        Serial.print("Attempting MQTT connection...");
+        Serial.print("Intentando conexion MQTT...");
         if(client.connect("ESP32Client"))
         {
-            Serial.println("Connected");
+            Serial.println("Conectado");
             //Subscribe
             client.subscribe("esp32/output");
         }
         else
         {
-            Serial.print("failed, rc=");
+            Serial.print("Fallido, rc=");
             Serial.print(client.state());
-            Serial.println(" try again in 5 seconds");
+            Serial.println(" Intento nuevamente en 5 segundos");
             // Wait 5 seconds before retrying
             delay(5000);
         }
