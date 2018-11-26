@@ -10,6 +10,8 @@ public class M2MQTTPrueba : M2MqttUnityClient {
 
 	public string msg;
 	public GameObject player;
+	private int speedMovement;
+	private float speedRotation;
 
 	public void SetBrokerAddress(string brokerAddress){
 		this.brokerAddress = brokerAddress;
@@ -64,6 +66,8 @@ public class M2MQTTPrueba : M2MqttUnityClient {
 		Debug.Log("Started application");
 		this.autoConnect = true;
 		base.Start();
+		speedMovement = player.GetComponentInChildren<PlayerWalk>().playerSpeed;
+		speedRotation = player.GetComponentInChildren<PlayerWalk>().deltaRotate;
 	}
 
 	protected override void Update()
@@ -78,6 +82,22 @@ public class M2MQTTPrueba : M2MqttUnityClient {
 		{
 			player.transform.position = player.transform.position + Camera.main.transform.forward * -2 * Time.deltaTime;
 		}
+		
+		SendMovement();
+		
+	}
+
+	private void SendMovement()
+	{
+		if(Input.GetKey(KeyCode.UpArrow))
+			client.Publish("esp32/output", System.Text.Encoding.UTF8.GetBytes("Forward"), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+		if(Input.GetKey(KeyCode.DownArrow))
+			client.Publish("esp32/output", System.Text.Encoding.UTF8.GetBytes("Backward"), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+	}
+
+	private void SendRotate()
+	{
+		
 	}
 
 	private void OnDestroy()
