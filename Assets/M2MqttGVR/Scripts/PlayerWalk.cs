@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerWalk : MonoBehaviour {
 
-	public int playerSpeed = 6;
+	public int playerSpeed = 8;
 	public float deltaRotate = 90f;
 
 	// Use this for initialization
