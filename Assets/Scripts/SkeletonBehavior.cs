@@ -5,7 +5,7 @@ using UnityEngine;
 public class SkeletonBehavior : MonoBehaviour {
 
     public GameObject player;
-    static Animator anim;
+    private Animator anim;
 
 	// Use this for initialization
 	void Start () {
