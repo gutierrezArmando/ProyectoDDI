@@ -5,7 +5,11 @@ using UnityEngine;
 public class GunBehavior : MonoBehaviour {
 
     private Animator anim;
-    public GameObject efecto;
+    public GameObject efectoParticulas;
+    public GameObject efectoSonidoBalas;
+    public GameObject efectoSonidoRecarga;
+
+    
 	// Use this for initialization
 	void Start () {
         anim = GetComponent<Animator>();
@@ -17,13 +21,15 @@ public class GunBehavior : MonoBehaviour {
         {
             anim.SetBool("isShooting", true);
             anim.SetBool("isNormalState", false);
-            efecto.SetActive(true);
+            efectoParticulas.SetActive(true);
+            efectoSonidoBalas.SetActive(true);
         }
         else
         {
             anim.SetBool("isShooting", false);
             anim.SetBool("isNormalState", true);
-            efecto.SetActive(false);
+            efectoParticulas.SetActive(false);
+            efectoSonidoBalas.SetActive(false);
         }
         if(Input.GetKeyDown(KeyCode.Mouse1))
         {
@@ -35,8 +41,10 @@ public class GunBehavior : MonoBehaviour {
 
     IEnumerator Reload()
     {
+        efectoSonidoRecarga.SetActive(true);
         anim.SetBool("isReload", true);
         yield return new WaitForSeconds(1.2f);
         anim.SetBool("isReload", false);
+        efectoSonidoRecarga.SetActive(false);
     }
 }
