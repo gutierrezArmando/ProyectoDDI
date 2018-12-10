@@ -40,4 +40,5 @@ public class SkeletonBehavior : MonoBehaviour {
             anim.SetBool("isAttacking", false);
         }
 	}
+
 }
