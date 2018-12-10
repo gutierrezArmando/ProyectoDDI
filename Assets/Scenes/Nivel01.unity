@@ -8784,7 +8784,7 @@ MonoBehaviour:
   efectoSonidoBalas: {fileID: 1856780714}
   efectoSonidoRecarga: {fileID: 1906082180}
   BalaPrefab: {fileID: 1486220626872340, guid: b9624475898de7f42ada927e34b0d304, type: 2}
-  speed: 750
+  speed: 1000
   lblCantidadInventario: {fileID: 1387140452}
 --- !u!1 &827029177
 GameObject:
@@ -15414,7 +15414,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 50
+  m_Text: 600
 --- !u!222 &1387140455
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17491,7 +17491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 1486220626872340, guid: b9624475898de7f42ada927e34b0d304, type: 2}
-  speed: 750
+  speed: 500
   lblCantidadInventario: {fileID: 1387140452}
 --- !u!1 &1586932887
 GameObject:
@@ -18136,12 +18136,22 @@ Prefab:
     - target: {fileID: 136526284629798878, guid: 451a09333d0ab914b8e07a9f87fc6756,
         type: 2}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 136526284629798878, guid: 451a09333d0ab914b8e07a9f87fc6756,
         type: 2}
       propertyPath: m_Radius
-      value: 0.13
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 136526284629798878, guid: 451a09333d0ab914b8e07a9f87fc6756,
+        type: 2}
+      propertyPath: m_Center.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 136526284629798878, guid: 451a09333d0ab914b8e07a9f87fc6756,
+        type: 2}
+      propertyPath: m_Height
+      value: 0.11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 451a09333d0ab914b8e07a9f87fc6756, type: 2}

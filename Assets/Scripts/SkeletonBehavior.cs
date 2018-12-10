@@ -6,6 +6,7 @@ public class SkeletonBehavior : MonoBehaviour {
 
     public GameObject player;
     private Animator anim;
+    private int life = 10;
 
 	// Use this for initialization
 	void Start () {
@@ -21,7 +22,7 @@ public class SkeletonBehavior : MonoBehaviour {
             direction.y = 0;
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
             anim.SetBool("isIdle", false);
-            if(direction.magnitude > 2)
+            if(direction.magnitude > 2 && life>0)
             {
                 this.transform.Translate(0,0,0.05f);
                 anim.SetBool("isWalking", true);
@@ -41,4 +42,30 @@ public class SkeletonBehavior : MonoBehaviour {
         }
 	}
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(life>0)
+        {
+            StartCoroutine(Damage());
+            print("Test");
+        }
+        else
+        {
+            anim.SetBool("isIdle", false);
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isAttacking", false);
+            anim.SetBool("isDeath", true);
+            Destroy(transform.root.gameObject, 5f);
+        }
+            
+    }
+
+    IEnumerator Damage()
+    {
+        life--;
+        anim.SetBool("isDamage", true);
+        yield return new WaitForSeconds(0.5f);
+        anim.SetBool("isDamage", false);
+        print("Test: " + life);
+    }
 }
