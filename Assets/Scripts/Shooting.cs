@@ -5,14 +5,11 @@ using UnityEngine;
 public class Shooting : MonoBehaviour {
 
     public GameObject bullet;
-    public float speed = 500f;
+    public float speed = 1250f;
 
     public GameObject lblCantidadInventario;
 
     private int cantidadInventario;
-
-    private int count = 0;
-
 	// Use this for initialization
 	void Start () {
 		
@@ -20,25 +17,15 @@ public class Shooting : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKey(KeyCode.Mouse0))
+		if(Input.GetKeyDown(KeyCode.Mouse0))
         {
-
             cantidadInventario = int.Parse(lblCantidadInventario.GetComponent<UnityEngine.UI.Text>().text);
             if(cantidadInventario>0)
-            {
-                if (count < 3)
-                    count++;
-                else
-                {
-                    StartCoroutine(Shoot());
-                    count = 0;
-                }
-            }
-                
+                Shoot();
         }
 	}
 
-    IEnumerator Shoot()
+    void Shoot()
     {
         GameObject instBullet = Instantiate(bullet, transform.position, Quaternion.identity) as GameObject;
         Rigidbody instBulletRigibody = instBullet.GetComponent<Rigidbody>();
@@ -50,7 +37,5 @@ public class Shooting : MonoBehaviour {
         cantidadInventario--;
         lblCantidadInventario.GetComponent<UnityEngine.UI.Text>().text = cantidadInventario.ToString();
 
-
-        yield return new WaitForSeconds(2f);
     }
 }

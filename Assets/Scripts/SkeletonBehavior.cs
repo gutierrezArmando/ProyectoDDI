@@ -6,11 +6,13 @@ public class SkeletonBehavior : MonoBehaviour {
 
     public GameObject player;
     private Animator anim;
-    private int life = 10;
+    private int life = 3;
+    private AudioSource audioDanio;
 
 	// Use this for initialization
 	void Start () {
         anim = GetComponent<Animator>();
+        audioDanio = GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -64,8 +66,10 @@ public class SkeletonBehavior : MonoBehaviour {
     {
         life--;
         anim.SetBool("isDamage", true);
-        yield return new WaitForSeconds(0.5f);
+        audioDanio.Play();
+        yield return new WaitForSeconds(0.25f);
         anim.SetBool("isDamage", false);
         print("Test: " + life);
+        audioDanio.Stop();
     }
 }
