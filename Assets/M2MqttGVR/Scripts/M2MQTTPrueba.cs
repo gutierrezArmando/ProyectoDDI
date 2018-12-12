@@ -13,6 +13,8 @@ public class M2MQTTPrueba : M2MqttUnityClient {
 	private int speedMovement;
 	private float speedRotation;
 
+    public String MQTTmessage;
+
 	public void SetBrokerAddress(string brokerAddress){
 		this.brokerAddress = brokerAddress;
 	}
@@ -74,14 +76,18 @@ public class M2MQTTPrueba : M2MqttUnityClient {
 	{
 		base.Update();
 		Debug.Log("En update de prueba: " + msg);
-		if (msg.Equals("Forward"))
-		{
-			player.transform.position = player.transform.position + Camera.main.transform.forward * 2 * Time.deltaTime;
-		}
-		else if (msg.Equals("Backward"))
-		{
-			player.transform.position = player.transform.position + Camera.main.transform.forward * -2 * Time.deltaTime;
-		}
+        if (msg.Equals("Forward"))
+        {
+            //player.transform.position = player.transform.position + Camera.main.transform.forward * player.GetComponent<PlayerWalk>().playerSpeed * Time.deltaTime;
+            MQTTmessage = "Forward";
+        }
+        else if (msg.Equals("Backward"))
+        {
+            MQTTmessage = "Backward";
+            //player.transform.position = player.transform.position + Camera.main.transform.forward * -player.GetComponent<PlayerWalk>().playerSpeed * Time.deltaTime;
+        }
+        else
+            MQTTmessage = msg;
 		
 		SendMovement();
 		

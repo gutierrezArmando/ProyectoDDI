@@ -98,7 +98,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1781338305306200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.29, y: 1.28, z: 2.48}
+  m_LocalPosition: {x: 6.89794, y: 1.28, z: 2.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4614353000326490}
@@ -215,6 +215,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 6
   deltaRotate: 10
+  efectoPasos: {fileID: 0}
+  MQTTProtocol: {fileID: 0}
 --- !u!114 &114431552645466580
 MonoBehaviour:
   m_ObjectHideFlags: 1

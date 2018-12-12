@@ -1182,6 +1182,11 @@ Transform:
   m_Father: {fileID: 1530143481}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &90450494 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1042696214958516, guid: ec04b8ead8f95f541a3a6053d3293780,
+    type: 2}
+  m_PrefabInternal: {fileID: 766120869}
 --- !u!1 &95513878
 GameObject:
   m_ObjectHideFlags: 0
@@ -7056,6 +7061,11 @@ Prefab:
       propertyPath: efectoPasos
       value: 
       objectReference: {fileID: 2083071152}
+    - target: {fileID: 114186425517486012, guid: 691faf96c2cddce4b8ae9eec568dfd7e,
+        type: 2}
+      propertyPath: MQTTProtocol
+      value: 
+      objectReference: {fileID: 90450494}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 691faf96c2cddce4b8ae9eec568dfd7e, type: 2}
   m_IsPrefabAsset: 0
@@ -8130,8 +8140,13 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1042696214958516, guid: ec04b8ead8f95f541a3a6053d3293780, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114049452746734154, guid: ec04b8ead8f95f541a3a6053d3293780,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 228873489}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec04b8ead8f95f541a3a6053d3293780, type: 2}
   m_IsPrefabAsset: 0

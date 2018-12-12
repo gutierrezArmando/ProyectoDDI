@@ -1,25 +1,8 @@
-/*
- * Ejemplo de protocolo MQTT para ESP32
- * Al recibir un mensaje "on", prende un LED (D2)
- * Al recibir un mensaje "off", apaga un LEC (D2)
- * Al tocar la terminal D4, publica mensaje "forward"
- * Al tocar la terminal D15, publica mensaje "backward"
- * Fuentes:
- * https://randomnerdtutorials.com/esp32-mqtt-publish-subscribe-arduino-ide/
- * https://www.instructables.com/id/IOT-Made-Simple-Playing-With-the-ESP32-on-Arduino-/
- * https://forum.arduino.cc/index.php?topic=319836.0
-*/
-
 #include<WiFi.h>
 #include <PubSubClient.h>
-//Para instalar la biblioteca PubSubClien.h: "Sketch -> Include Library -> Manage Libraries... -> Type PubSub in Search field -> Install."
 
-//#define TOUCH_FORWARD T0 // ESP32 Pin D4
-//#define TOUCH_BACKWARD T3 //ESP32 Pin D15
-#define TOUCH_FORWARD T8 // ESP32 Pin D4
-#define TOUCH_BACKWARD T9 //ESP32 Pin D15
-#define LED_PIN 13
-
+#define ANALOG_EJE_X 34
+#define ANALOG_EJE_Y 35
 const char* ssid = "w1f1@p3rryt05";//Nombre de wifi
 const char* password = "z0w1eYn1n0";//Password
 const char* mqtt_server = "192.168.1.77";//IP del servidor con mosquitto broker
@@ -29,56 +12,48 @@ PubSubClient client(espClient);
 
 long lastMsg = 0;
 char msg[50];
-//int value = 0;
 bool published = false;
-//int touchValueForward = 100;
-//int touchValueBackward = 100;
 
-void setup()
-{
+int valor_x;
+int valor_y;
+
+void setup() {
+    // put your setup code here, to run once:
     Serial.begin(115200);
     setup_wifi();
     client.setServer(mqtt_server, 1883);
     client.setCallback(callback);
-    pinMode(LED_PIN, OUTPUT);
-    digitalWrite (LED_PIN, LOW);
 }
 
-void loop()
-{
-    if(!client.connected())
-    {
+void loop() {
+    
+    if(!client.connected()){
         reconnect();
     }
+    //delay(2000);
     client.loop();
     long now = millis();
+    valor_y = analogRead(ANALOG_EJE_Y);
+    Serial.println(valor_y);
     //touchValueForward = touchRead(TOUCH_FORWARD);
     //touchValueBackward = touchRead(TOUCH_BACKWARD);
-    if(touchRead(TOUCH_FORWARD) < 50 && touchRead(TOUCH_BACKWARD) >= 50)
+    if(valor_y > 3000)
     {
-        delay(300);
-        if(touchRead(TOUCH_FORWARD) < 50 && touchRead(TOUCH_BACKWARD) >= 50)
+        if(!published)
         {
-            if(!published)
-            {
-                Serial.println("Forward");
-                //client.publish("topic","Mensaje");
-                client.publish("esp32/input", "Forward");
-                published = true;
-            }   
+            Serial.println("Forward");
+            //client.publish("topic","Mensaje");
+            client.publish("esp32/input", "Forward");
+            published = true;
         }
     }
-    else if(touchRead(TOUCH_BACKWARD) < 50 && touchRead(TOUCH_FORWARD) >= 50)
+    else if(valor_y < 1000)
     {
-        delay(300);
-        if(touchRead(TOUCH_BACKWARD) < 50 && touchRead(TOUCH_FORWARD) >= 50)
+        if(!published)
         {
-            if(!published)
-            {
-                Serial.println("Backward");
-                client.publish("esp32/input", "Backward");
-                published = true;
-            }   
+            Serial.println("Backward");
+            client.publish("esp32/input", "Backward");
+            published = true;
         }
     }
     else
@@ -131,12 +106,12 @@ void callback(char* topic, byte* message, unsigned int length)
         if(messageTemp=="on")
         {
             Serial.println("on");
-            digitalWrite(LED_PIN, HIGH);
+            //digitalWrite(LED_PIN, HIGH);
         }
         else if(messageTemp=="off")
         {
             Serial.println("off");
-            digitalWrite(LED_PIN, LOW);
+            //digitalWrite(LED_PIN, LOW);
         }
     }
 }/*Fin funcion callback*/
