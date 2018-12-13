@@ -9,6 +9,7 @@ public class GunBehavior : MonoBehaviour {
     public GameObject efectoSonidoBalas;
     public GameObject efectoSonidoRecarga;
     public GameObject BalaPrefab;
+    public GameObject MQTTProtocol;
 
     public GameObject lblCantidadInventario;
     private int cantidadInventario;
@@ -22,7 +23,7 @@ public class GunBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Mouse0))
+		if(Input.GetKeyDown(KeyCode.Mouse0) ||  MQTTProtocol.GetComponent<M2MQTTTerminals>().msg=="Shoot")
         {
             cantidadInventario = int.Parse(lblCantidadInventario.GetComponent<UnityEngine.UI.Text>().text);
             if (cantidadInventario > 0)
@@ -31,10 +32,10 @@ public class GunBehavior : MonoBehaviour {
                 return;
             }
         }
-        if(Input.GetKeyDown(KeyCode.Mouse1))
+        if(Input.GetKeyDown(KeyCode.Mouse1) || MQTTProtocol.GetComponent<M2MQTTTerminals>().msg=="Reload")
         {
-            StartCoroutine(Reload());
-            return;
+            //StartCoroutine(Reload());
+            //return;
             //anim.SetBool("isReload", false);
         }
 	}

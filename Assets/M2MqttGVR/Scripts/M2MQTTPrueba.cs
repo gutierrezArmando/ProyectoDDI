@@ -89,10 +89,10 @@ public class M2MQTTPrueba : M2MqttUnityClient {
         else
             MQTTmessage = msg;
 		
-		SendMovement();
+		//SendMovement();
 		
 	}
-
+    /*
 	private void SendMovement()
 	{
 		if(Input.GetKey(KeyCode.UpArrow))
@@ -100,7 +100,7 @@ public class M2MQTTPrueba : M2MqttUnityClient {
 		if(Input.GetKey(KeyCode.DownArrow))
 			client.Publish("esp32/output", System.Text.Encoding.UTF8.GetBytes("Backward"), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
 	}
-
+    */
 	private void SendRotate()
 	{
 		

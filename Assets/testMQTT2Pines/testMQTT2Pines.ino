@@ -16,8 +16,8 @@
 
 //#define TOUCH_FORWARD T0 // ESP32 Pin D4
 //#define TOUCH_BACKWARD T3 //ESP32 Pin D15
-#define TOUCH_FORWARD T8 // ESP32 Pin D4
-#define TOUCH_BACKWARD T9 //ESP32 Pin D15
+#define TOUCH_FORWARD T8
+#define TOUCH_BACKWARD T9
 #define LED_PIN 13
 
 const char* ssid = "w1f1@p3rryt05";//Nombre de wifi

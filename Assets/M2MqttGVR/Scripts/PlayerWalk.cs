@@ -15,7 +15,15 @@ public class PlayerWalk : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKey(KeyCode.UpArrow) || MQTTProtocol.GetComponent<M2MQTTPrueba>().MQTTmessage=="Forward")
+        Walk();
+        Rotate();
+
+		//Debug.Log("Updated...");
+	}
+
+    void Walk()
+    {
+        if (Input.GetKey(KeyCode.UpArrow) || MQTTProtocol.GetComponent<M2MQTTPrueba>().MQTTmessage == "Forward")
         {
             transform.position = transform.position + Camera.main.transform.forward * playerSpeed * Time.deltaTime;
             efectoPasos.SetActive(true);
@@ -24,14 +32,17 @@ public class PlayerWalk : MonoBehaviour {
         {
             transform.position = transform.position + Camera.main.transform.forward * -playerSpeed * Time.deltaTime;
             efectoPasos.SetActive(true);
-        }		
-        if(Input.GetKey(KeyCode.RightArrow))
-			transform.Rotate(new Vector3(0f, deltaRotate, 0f) * Time.deltaTime);
-		if(Input.GetKey(KeyCode.LeftArrow))
-			transform.Rotate(new Vector3(0f, -deltaRotate, 0f) * Time.deltaTime);
-        if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || MQTTProtocol.GetComponent<M2MQTTPrueba>().MQTTmessage=="Pin Free")
+        }
+        if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || MQTTProtocol.GetComponent<M2MQTTPrueba>().MQTTmessage == "Pin Y Free" || MQTTProtocol.GetComponent<M2MQTTPrueba>().MQTTmessage == "Pin X Free")
             efectoPasos.SetActive(false);
-		//Debug.Log("Updated...");
-	}
+    }
+
+    void Rotate()
+    {
+        if (Input.GetKey(KeyCode.RightArrow)||MQTTProtocol.GetComponent<M2MQTTRotate>().msg=="Right")
+            transform.Rotate(new Vector3(0f, deltaRotate, 0f) * Time.deltaTime);
+        if (Input.GetKey(KeyCode.LeftArrow) || MQTTProtocol.GetComponent<M2MQTTRotate>().msg == "Left")
+            transform.Rotate(new Vector3(0f, -deltaRotate, 0f) * Time.deltaTime);
+    }
 	
 }
