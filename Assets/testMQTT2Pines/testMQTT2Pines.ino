@@ -14,13 +14,15 @@
 #include <PubSubClient.h>
 //Para instalar la biblioteca PubSubClien.h: "Sketch -> Include Library -> Manage Libraries... -> Type PubSub in Search field -> Install."
 
-#define TOUCH_FORWARD T0 // ESP32 Pin D4
-#define TOUCH_BACKWARD T3 //ESP32 Pin D15
-#define LED_PIN 2
+//#define TOUCH_FORWARD T0 // ESP32 Pin D4
+//#define TOUCH_BACKWARD T3 //ESP32 Pin D15
+#define TOUCH_FORWARD T8
+#define TOUCH_BACKWARD T9
+#define LED_PIN 13
 
-const char* ssid = "WIFI_NAME";//Nombre de wifi
-const char* password = "WIFI_PASSWORD";//Password
-const char* mqtt_server = "IP_BROKER";//IP del servidor con mosquitto broker
+const char* ssid = "w1f1@p3rryt05";//Nombre de wifi
+const char* password = "z0w1eYn1n0";//Password
+const char* mqtt_server = "192.168.1.77";//IP del servidor con mosquitto broker
 //const char* mqtt_server = "http://broker.mqtt-dashboard.com/"
 WiFiClient espClient;
 PubSubClient client(espClient);
