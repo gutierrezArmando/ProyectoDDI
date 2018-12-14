@@ -9,6 +9,7 @@
 
 #define LED_OFFLINE 33
 #define LED_ONLINE 32
+#define LED_MQTT_ONLINE 25
 const char* ssid = "w1f1@p3rryt05";//Nombre de wifi
 const char* password = "z0w1eYn1n0";//Password
 const char* mqtt_server = "192.168.1.77";//IP del servidor con mosquitto broker
@@ -30,8 +31,10 @@ void setup() {
     Serial.begin(115200);
     pinMode(LED_OFFLINE, OUTPUT);
     pinMode(LED_ONLINE, OUTPUT);
+    pinMode(LED_MQTT_ONLINE, OUTPUT);
     digitalWrite(LED_OFFLINE, HIGH);
     digitalWrite(LED_ONLINE, LOW);
+    digitalWrite(LED_MQTT_ONLINE, LOW);
     setup_wifi();
     client.setServer(mqtt_server, 1883);
     client.setCallback(callback);
@@ -40,6 +43,7 @@ void setup() {
 void loop() {
     
     if(!client.connected()){
+        digitalWrite(LED_MQTT_ONLINE, LOW);
         reconnect();
     }
     //delay(2000);
@@ -191,6 +195,7 @@ void reconnect()
             Serial.println("Conectado");
             //Subscribe
             client.subscribe("esp32/output");
+            digitalWrite(LED_MQTT_ONLINE, HIGH);
         }
         else
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerWalk : MonoBehaviour {
 
-	public int playerSpeed = 8;
+	public int playerSpeed = 5;
 	public float deltaRotate = 90f;
     public GameObject efectoPasos;
     public GameObject MQTTProtocol;

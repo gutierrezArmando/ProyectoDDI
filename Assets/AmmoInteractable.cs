@@ -24,13 +24,13 @@ public class AmmoInteractable : MonoBehaviour {
                 //print(lblCantidadInventario.GetComponent<UnityEngine.UI.Text>().text);
                 cantidadInventario = int.Parse(lblCantidadInventario.GetComponent<UnityEngine.UI.Text>().text);
                 print("Original: " + cantidadInventario);
-                if (cantidadInventario < 90)
-                {
-                    cantidadInventario += 30;
+                //if (cantidadInventario < 90)
+                //{
+                    cantidadInventario += 60;
                     print("Nuerva: " + cantidadInventario);
                     lblCantidadInventario.GetComponent<UnityEngine.UI.Text>().text = cantidadInventario.ToString();
                     Destroy(transform.root.gameObject);
-                }
+                //}
             }
         }
 	}

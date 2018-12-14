@@ -31,7 +31,7 @@ public class SkeletonBehavior : MonoBehaviour {
             anim.SetBool("isIdle", false);
             if(direction.magnitude > 2 && life>0)
             {
-                this.transform.Translate(0,0,0.1f);
+                this.transform.Translate(0,0,0.05f);
                 anim.SetBool("isWalking", true);
                 anim.SetBool("isAttacking", false);          
             }
@@ -120,7 +120,8 @@ public class SkeletonBehavior : MonoBehaviour {
     {
         StartCoroutine(activarSonidoEspada());
         alphaLevel = healthIndicator.GetComponent<MeshRenderer>().material.color.a;
-        alphaLevel += 0.05f;
+        if(alphaLevel < (0.05 *7))
+            alphaLevel += 0.05f;
         healthIndicator.GetComponent<MeshRenderer>().material.color = new Color(255f, 0, 0, alphaLevel);
     }
     IEnumerator activarSonidoEspada()
