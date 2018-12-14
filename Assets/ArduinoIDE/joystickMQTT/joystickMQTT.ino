@@ -10,9 +10,13 @@
 #define LED_OFFLINE 33
 #define LED_ONLINE 32
 #define LED_MQTT_ONLINE 25
-const char* ssid = "w1f1@p3rryt05";//Nombre de wifi
-const char* password = "z0w1eYn1n0";//Password
-const char* mqtt_server = "192.168.1.77";//IP del servidor con mosquitto broker
+//const char* ssid = "w1f1@p3rryt05";//Nombre de wifi
+//const char* password = "z0w1eYn1n0";//Password
+//const char* mqtt_server = "192.168.1.77";//IP del servidor con mosquitto broker
+
+const char* ssid = "SM-G935F6558";//Nombre de wifi
+const char* password = "dogex670";//Password
+const char* mqtt_server = "192.168.43.190";//IP del servidor con mosquitto broker
 //const char* mqtt_server = "http://broker.mqtt-dashboard.com/"
 WiFiClient espClient;
 PubSubClient client(espClient);

@@ -13,7 +13,7 @@ public class M2MQTTMain : M2MqttUnityClient {
 
     protected override void Start()
     {
-        SetBrokerAddress("192.168.1.77");
+        SetBrokerAddress("192.168.43.190");
         SetBrokerPort("1883");
         Debug.Log("Started application");
         this.autoConnect = true;
